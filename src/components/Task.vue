@@ -5,11 +5,13 @@
   >
       <h3>
       {{ task.text }}
+
             <i @click="$emit('delete-task', task.id)" class="fa-solid fa-circle-xmark"></i>
 
     </h3>
 
     <p>{{task.day}}</p>
+      {{ task.reminder }}
 </div>
 </template>
 
@@ -19,11 +21,9 @@ export default {
     props: {
         task: Object,
     }, 
-    mounted:{
-    onDelete(id) {
-      this.$emit('delete-task', id)
-    }, 
-  },
+   
+
+    emits:['delete-task', 'toggle-reminder'],
 }
 
 </script>
