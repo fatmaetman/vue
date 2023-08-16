@@ -29,3 +29,4 @@ npm run build
 ```
 # vue
 # vue2
+# vue2
