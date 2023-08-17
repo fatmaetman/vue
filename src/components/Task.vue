@@ -11,7 +11,7 @@
     </h3>
 
     <p>{{task.day}}</p>
-      {{ task.reminder }}
+    
 </div>
 </template>
 

@@ -1,93 +1,37 @@
 <template>
-<div class="container">
-  <Header @toggle-add-task="toggleAddTask" 
-  title="Task Tracker" :showAddTask="showAddTask " />
-<div v-show="showAddTask">
-  <AddTask @add-task="addTask" />
-</div>
-  <Tasks @toggle-reminder="toggleReminder"
-  @delete-task="deleteTask"
-  :tasks="tasks" />
-</div>
+  <div class="container">
+    <Header
+      @toggle-add-task="toggleAddTask"
+      title="Task Tracker"
+      :showAddTask="showAddTask"
+    />
+    <router-view :showAddTask="showAddTask"></router-view>
+    <Footer />
+  </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
-import Tasks from './components/Tasks.vue'
-import AddTask from './components/AddTask.vue'
+import Footer from './components/Footer.vue'
 
 export default {
-  name:'App',
-  components:{
+  name: 'App',
+  components: {
     Header,
-    Tasks,
-    AddTask,
-    
+    Footer,
   },
   data() {
     return {
-      
       showAddTask: false,
     }
   },
   methods: {
-    toggleAddTask(){
+    toggleAddTask() {
       this.showAddTask = !this.showAddTask
     },
-    addTask(task) {
-      this.tasks = [...this.tasks, task]
-    },
-    deleteTask(id) {
-      if (confirm('Aer you sure?')){
-        this.tasks = this.tasks.filter((task) => task.id !== id) 
-    }
-    },
-    toggleReminder(id) {
-      this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder} : task
-      )
-      console.log(id)
-      console.log(this.tasks)
-    },
-     async fetchTask (){
-    const res = await fetch('http://localhost:3000/tasks')
-    const data = await res.json()
-
   },
-  },
-
-
-  
- 
-
-  
-  created() {
-    this.tasks = [
-    {
-      id: 1,
-      text: 'Doctors Appointment',
-      day: "March 1rd at 2:30pm" ,
-      reminder:true,
-    } ,
-    {
-      id: 2,
-      text: 'Meeting at School',
-      day: "March 3rd at 1:30pm" ,
-      reminder:true,
-    } ,{
-      id: 3,
-      text: 'Food Shopping',
-      day: "March 3rd at 11:00pm" ,
-      reminder:true,
-    } ,
-    ]
-  
-    
-  }
 }
-
 </script>
-
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
